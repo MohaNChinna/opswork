@@ -12,5 +12,5 @@ service 'tomcat' do
     supports :restart => true, :reload => false, :status => true
   end
 
-  action :enable, :restart
+  action :enable
 end
