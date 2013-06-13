@@ -1,11 +1,4 @@
-package "tomcat#{node['tomcat']['base_version']}"
-
-package 'apache2' do
-  case node[:platform]
-  when 'centos','redhat','fedora','amazon'
-    package_name 'httpd'
-  when 'debian','ubuntu'
-    package_name 'apache2'
-  end
-  action :install
-end
+include_recipe 'tomcat::install'
+include_recipe 'tomcat::service'
+include_recipe 'apache2'
+include_recipe 'apache2::service'
