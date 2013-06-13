@@ -26,6 +26,10 @@ default["tomcat"]["certificate_dn"] = "cn=localhost"
 default["tomcat"]["loglevel"] = "INFO"
 default["tomcat"]["tomcat_auth"] = "true"
 
+default['tomcat']['apache_tomcat_bind_mod'] = 'proxy' # or: proxy_ajp
+default['tomcat']['apache_tomcat_bind_config'] = 'tomcat_bind.conf'
+default['tomcat']['apache_tomcat_bind_path'] = '/tc/'
+
 case node['platform']
 when "centos","redhat","fedora"
   default["tomcat"]["user"] = "tomcat"

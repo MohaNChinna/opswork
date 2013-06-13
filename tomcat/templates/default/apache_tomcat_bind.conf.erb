@@ -1,0 +1,7 @@
+<% if node['tomcat']['apache_tomcat_bind_mod'] == 'proxy_ajp' -%>
+ProxyPass <%= node['tomcat']['apache_tomcat_bind_path'] %> ajp://localhost:<%= node['tomcat']['ajp_port'] %>/
+ProxyPassReverse <%= node['tomcat']['apache_tomcat_bind_path'] %> ajp://localhost:<%= node['tomcat']['ajp_port'] %>/
+<% else %>
+ProxyPass <%= node['tomcat']['apache_tomcat_bind_path'] %> http://localhost:<%= node['tomcat']['port'] %>/
+ProxyPassReverse <%= node['tomcat']['apache_tomcat_bind_path'] %> http://localhost:<%= node['tomcat']['port'] %>/
+<% end -%>
