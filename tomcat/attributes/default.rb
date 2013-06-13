@@ -40,3 +40,4 @@ when "centos","redhat","fedora"
   default["tomcat"]["webapp_dir"] = "/var/lib/tomcat#{node["tomcat"]["base_version"]}/webapps"
   default["tomcat"]["keytool"] = "/usr/lib/jvm/java/bin/keytool"
   default["tomcat"]["endorsed_dir"] = "#{node["tomcat"]["home"]}/lib/endorsed"
+end
