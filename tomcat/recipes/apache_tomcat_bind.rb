@@ -1,4 +1,11 @@
-execute "enable module for apache-tomcat binding" do
+execute 'enable mod_proxy for apache-tomcat binding' do
+  command '/usr/sbin/a2enmod proxy'
+  not_if do
+    ::File.symlink?("#{node['apache']['dir']}/mods-enabled/proxy.load") || node['tomcat']['apache_tomcat_bind_mod'] !~ /\Aproxy/
+  end
+end
+
+execute 'enable module for apache-tomcat binding' do
   command "/usr/sbin/a2enmod #{node['tomcat']['apache_tomcat_bind_mod']}"
   notifies :restart, resources(:service => 'apache2')
   not_if {::File.symlink?("#{node['apache']['dir']}/mods-enabled/#{node['tomcat']['apache_tomcat_bind_mod']}.load")}

@@ -26,7 +26,7 @@ default["tomcat"]["certificate_dn"] = "cn=localhost"
 default["tomcat"]["loglevel"] = "INFO"
 default["tomcat"]["tomcat_auth"] = "true"
 
-default['tomcat']['apache_tomcat_bind_mod'] = 'proxy' # or: proxy_ajp
+default['tomcat']['apache_tomcat_bind_mod'] = 'proxy_http' # or: proxy_ajp
 default['tomcat']['apache_tomcat_bind_config'] = 'tomcat_bind.conf'
 default['tomcat']['apache_tomcat_bind_path'] = '/tc/'
 
