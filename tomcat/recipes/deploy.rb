@@ -5,8 +5,8 @@ node[:deploy].each do |application, deploy|
   target_dir = "#{node['tomcat']['webapps_base_dir']}/xxx"
 
   directory target_dir do
-    owner root
-    group root
+    owner 'root'
+    group 'root'
     mode 0775
     action :create
     recursive true
