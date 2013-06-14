@@ -34,19 +34,3 @@ default['tomcat']['apache_tomcat_bind_mod'] = 'proxy_http' # or: proxy_ajp
 default['tomcat']['apache_tomcat_bind_config'] = 'tomcat_bind.conf'
 default['tomcat']['apache_tomcat_bind_path'] = '/tc/'
 default['tomcat']['webapps_dir_entries_to_delete'] = %w(config log public tmp)
-
-case node['platform']
-when "centos","redhat","fedora"
-  default["tomcat"]["user"] = "tomcat"
-  default["tomcat"]["group"] = "tomcat"
-  default["tomcat"]["home"] = "/usr/share/tomcat#{node["tomcat"]["base_version"]}"
-  default["tomcat"]["base"] = "/usr/share/tomcat#{node["tomcat"]["base_version"]}"
-  default["tomcat"]["config_dir"] = "/etc/tomcat#{node["tomcat"]["base_version"]}"
-  default["tomcat"]["log_dir"] = "/var/log/tomcat#{node["tomcat"]["base_version"]}"
-  default["tomcat"]["tmp_dir"] = "/var/cache/tomcat#{node["tomcat"]["base_version"]}/temp"
-  default["tomcat"]["work_dir"] = "/var/cache/tomcat#{node["tomcat"]["base_version"]}/work"
-  default["tomcat"]["context_dir"] = "#{node["tomcat"]["config_dir"]}/Catalina/localhost"
-  default["tomcat"]["webapp_dir"] = "/var/lib/tomcat#{node["tomcat"]["base_version"]}/webapps"
-  default["tomcat"]["keytool"] = "/usr/lib/jvm/java/bin/keytool"
-  default["tomcat"]["endorsed_dir"] = "#{node["tomcat"]["home"]}/lib/endorsed"
-end
