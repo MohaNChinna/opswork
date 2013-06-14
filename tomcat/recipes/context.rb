@@ -7,5 +7,6 @@ node[:deploy].each do |application, deploy|
     mode 0644
     backup false
     variables(:resource_name => node['datasources'][application], :webapp_name => application)
+    notifies :restart, resources(:service => 'tomcat')
   end
 end

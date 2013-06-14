@@ -28,3 +28,5 @@ node[:deploy].each do |application, deploy|
     action :create
   end
 end
+
+include_recipe 'tomcat::context'
