@@ -1,21 +1,30 @@
-#include_recipe 'deploy'
-#include_recipe 'dependencies'
+include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
-  temp_dir = Dir.mktmpdir(application)
-  target_dir = ::File.join(node['tomcat']['webapps_base_dir'], application)
-
-  directory ::File.join(target_dir, 'shared') do
-    owner 'root' # TODO
-    group 'tomcat' # TODO
-    mode 0775 # TODO?
-    action :create
-    recursive true
+  opsworks_deploy_dir do
+    user deploy[:user]
+    group deploy[:group]
+    path deploy[:deploy_to]
   end
 
-  deploy temp_dir do
-    repository deploy[:scm][:repository]
-    deploy_to target_dir
-    symlinks({})
+  opsworks_deploy do
+    deploy_data deploy
+    app application
+  end
+
+  current_dir = ::File.join(deploy[:deploy_to], 'current')
+  webapp_dir = ::File.join(node['tomcat']['webapps_base_dir'], application)
+
+  ruby_block "remove unnecessary directory entries in #{current_dir}" do
+    block do
+      node['tomcat']['webapps_dir_entries_to_delete'].each do |dir_entry|
+        ::FileUtils.rm_rf(::File.join(current_dir, dir_entry), :secure => true)
+      end
+    end
+  end
+
+  link webapp_dir do
+    to current_dir
+    action :create
   end
 end
