@@ -1,11 +1,11 @@
-include_recipe 'deploy'
+#include_recipe 'deploy'
 #include_recipe 'dependencies'
 
 node[:deploy].each do |application, deploy|
-  temp_dir = Dir.mktmpdir(deploy['application']) # TODO: shortname?
-  target_dir = "#{node['tomcat']['webapps_base_dir']}/#{deploy['application']}" # TODO: join, shortname?
+  temp_dir = Dir.mktmpdir(application)
+  target_dir = ::File.join(node['tomcat']['webapps_base_dir'], application)
 
-  directory target_dir do
+  directory ::File.join(target_dir, 'shared') do
     owner 'root' # TODO
     group 'tomcat' # TODO
     mode 0775 # TODO?
