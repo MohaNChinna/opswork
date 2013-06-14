@@ -1,6 +1,7 @@
 <Context>
-  <Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource"
+  <Resource name="<%= @resource_name %>" auth="Container" type="javax.sql.DataSource"
             maxActive="20" maxIdle="5" maxWait="10000"
-            username="<%= node['tomcat']['apache_tomcat_bind_path'] %>" password="javadude" driverClassName="com.mysql.jdbc.Driver"
-            url="jdbc:mysql://localhost:3306/javatest"/>
+            username="<%= node['deploy'][@webapp_name]['database']['username'] %>" password="<%= node['deploy'][@webapp_name]['database']['password'] %>"
+            driverClassName="com.mysql.jdbc.Driver"
+            url="jdbc:mysql://<%= node['deploy'][@webapp_name]['database']['host'] %>:3306/<%= node['deploy'][@webapp_name]['database']['database'] %>"/>
 </Context>
