@@ -8,6 +8,7 @@ node[:deploy].each do |application, deploy|
     group 'root'
     mode 0644
     backup false
+    only_if { node['datasources'][application] }
     variables(:resource_name => node['datasources'][application], :webapp_name => application)
     notifies :restart, resources(:service => 'tomcat')
   end
