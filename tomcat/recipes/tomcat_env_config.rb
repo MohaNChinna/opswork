@@ -1,6 +1,6 @@
 include_recipe 'tomcat::service'
 
-template 'tomcat thru apache binding' do
+template 'tomcat environment configuration' do
   path ::File.join(node['tomcat']['system_env_dir'], "tomcat#{node['tomcat']['base_version']}")
   source 'tomcat_env_config.erb'
   owner 'root'
