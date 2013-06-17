@@ -1,7 +1,12 @@
 default['tomcat']['base_version'] = 6
 default['tomcat']['port'] = 8080
 default['tomcat']['ajp_port'] = 8009
-default['tomcat']['java_opts'] = platform?('debian', 'ubuntu') ? '-Djava.awt.headless=true -Xmx128m -XX:+UseConcMarkSweepGC' : ''
+case node[:platform]
+when 'centos', 'redhat', 'fedora', 'amazon'
+  default['tomcat']['java_opts'] = ''
+when 'debian', 'ubuntu'
+  default['tomcat']['java_opts'] = '-Djava.awt.headless=true -Xmx128m -XX:+UseConcMarkSweepGC'
+end
 default['tomcat']['catalina_base_dir'] = "/etc/tomcat#{node['tomcat']['base_version']}"
 default['tomcat']['webapps_base_dir'] = '/var/lib/tomcat6/webapps'
 default['tomcat']['lib_dir'] = "/usr/share/tomcat#{node['tomcat']['base_version']}/lib"
@@ -11,4 +16,9 @@ default['tomcat']['apache_tomcat_bind_mod'] = 'proxy_http' # or: 'proxy_ajp'
 default['tomcat']['apache_tomcat_bind_config'] = 'tomcat_bind.conf'
 default['tomcat']['apache_tomcat_bind_path'] = '/tc/'
 default['tomcat']['webapps_dir_entries_to_delete'] = %w(config log public tmp)
-default['tomcat']['system_env_dir'] = platform?('debian', 'ubuntu') ? '/etc/default' : '/etc/sysconfig'
+case node[:platform]
+when 'centos', 'redhat', 'fedora', 'amazon'
+  default['tomcat']['system_env_dir'] = '/etc/sysconfig'
+when 'debian', 'ubuntu'
+  default['tomcat']['system_env_dir'] = '/etc/default'
+end
