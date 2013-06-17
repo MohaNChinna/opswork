@@ -10,6 +10,9 @@ execute 'enable module for apache-tomcat binding' do
   not_if {::File.symlink?("#{node['apache']['dir']}/mods-enabled/#{node['tomcat']['apache_tomcat_bind_mod']}.load")}
 end
 
+include_recipe 'tomcat::service'
+include_recipe 'apache2::service'
+
 template 'tomcat thru apache binding' do
   path "#{node['apache']['dir']}/conf.d/#{node['tomcat']['apache_tomcat_bind_config']}"
   source 'apache_tomcat_bind.conf.erb'
@@ -17,5 +20,6 @@ template 'tomcat thru apache binding' do
   group 'root'
   mode 0644
   backup false
+  notifies :restart, resources(:service => 'tomcat')
   notifies :restart, resources(:service => 'apache2')
 end
