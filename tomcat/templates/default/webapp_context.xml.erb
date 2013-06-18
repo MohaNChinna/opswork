@@ -3,5 +3,6 @@
             maxActive="20" maxIdle="5" maxWait="10000"
             username="<%= node['deploy'][@webapp_name]['database']['username'] %>" password="<%= node['deploy'][@webapp_name]['database']['password'] %>"
             driverClassName="com.mysql.jdbc.Driver"
-            url="jdbc:mysql://<%= node['deploy'][@webapp_name]['database']['host'] %>:3306/<%= node['deploy'][@webapp_name]['database']['database'] %>"/>
+            url="jdbc:mysql://<%= node['deploy'][@webapp_name]['database']['host'] %>:3306/<%= node['deploy'][@webapp_name]['database']['database'] %>"
+            factory="org.apache.commons.dbcp.BasicDataSourceFactory" />
 </Context>
