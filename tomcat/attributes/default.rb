@@ -13,7 +13,7 @@ when 'debian', 'ubuntu'
   default['tomcat']['java_opts'] = '-Djava.awt.headless=true -Xmx128m -XX:+UseConcMarkSweepGC'
 end
 default['tomcat']['catalina_base_dir'] = "/etc/tomcat#{node['tomcat']['base_version']}"
-default['tomcat']['webapps_base_dir'] = '/var/lib/tomcat6/webapps'
+default['tomcat']['webapps_base_dir'] = "/var/lib/tomcat#{node['tomcat']['base_version']}/webapps"
 default['tomcat']['lib_dir'] = "/usr/share/tomcat#{node['tomcat']['base_version']}/lib"
 default['tomcat']['java_dir'] = '/usr/share/java'
 default['tomcat']['mysql_connector_jar'] = 'mysql-connector-java.jar'
