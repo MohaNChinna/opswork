@@ -117,6 +117,15 @@
       <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"/>
       -->
 
+<% if node['tomcat']['base_version'].to_i < 7 -%>
+      <!-- The request dumper valve dumps useful debugging information about
+           the request and response data received and sent by Tomcat.
+           Documentation at: /docs/config/valve.html -->
+      <!--
+      <Valve className="org.apache.catalina.valves.RequestDumperValve"/>
+      -->
+
+<% end -%>
 <% if node['tomcat']['base_version'].to_i > 6 -%>
       <!-- Use the LockOutRealm to prevent attempts to guess user passwords
            via a brute-force attack -->
@@ -128,7 +137,9 @@
              available for use by the Realm.  -->
         <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
                resourceName="UserDatabase"/>
+<% if node['tomcat']['base_version'].to_i > 6 -%>
       </Realm>
+<% end -%>
 
       <Host name="localhost"  appBase="webapps"
         unpackWARs="<%= node['tomcat']['unpack_wars'] %>" autoDeploy="<%= node['tomcat']['auto_deploy'] %>">
