@@ -1,6 +1,10 @@
 default['tomcat']['base_version'] = 6
 default['tomcat']['port'] = 8080
+default['tomcat']['secure_port'] = 8443
 default['tomcat']['ajp_port'] = 8009
+default['tomcat']['shutdown_port'] = 8005
+default['tomcat']['unpack_wars'] = true
+default['tomcat']['auto_deploy'] = true
 case node[:platform]
 when 'centos', 'redhat', 'fedora', 'amazon'
   default['tomcat']['java_opts'] = ''

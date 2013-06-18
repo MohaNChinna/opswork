@@ -9,3 +9,13 @@ template 'tomcat environment configuration' do
   backup false
   notifies :restart, resources(:service => 'tomcat')
 end
+
+template 'tomcat server configuration' do
+  path ::File.join(node['tomcat']['catalina_base_dir'], 'server.xml')
+  source 'server.xml.erb'
+  owner 'root'
+  group 'root'
+  mode 0644
+  backup false
+  notifies :restart, resources(:service => 'tomcat')
+end

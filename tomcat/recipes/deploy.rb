@@ -27,6 +27,13 @@ node[:deploy].each do |application, deploy|
     to current_dir
     action :create
   end
+
+  include_recipe 'tomcat::service'
+
+  service 'tomcat' do
+    action :restart
+    not_if node['tomcat']['auto_deploy']
+  end
 end
 
 include_recipe 'tomcat::context'
