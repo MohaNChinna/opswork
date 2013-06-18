@@ -5,8 +5,6 @@ service 'tomcat' do
   action :enable
 end
 
-include_recipe 'tomcat::container_config'
-
 bash '(re-)start autofs earlier' do
   user 'root'
   code <<-EOC
@@ -14,5 +12,6 @@ bash '(re-)start autofs earlier' do
   EOC
 end
 
+include_recipe 'tomcat::container_config'
 include_recipe 'apache2'
 include_recipe 'tomcat::apache_tomcat_bind'

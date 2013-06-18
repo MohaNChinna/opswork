@@ -33,7 +33,7 @@ node[:deploy].each do |application, deploy|
 
   service 'tomcat' do
     action :restart
-    not_if { node['tomcat']['auto_deploy'] }
+    not_if { node['tomcat']['auto_deploy'].to_s == 'true' }
   end
 end
 
