@@ -3,6 +3,7 @@ default['tomcat']['port'] = 8080
 default['tomcat']['secure_port'] = 8443
 default['tomcat']['ajp_port'] = 8009
 default['tomcat']['shutdown_port'] = 8005
+default['tomcat']['uri_encoding'] = 'UTF-8'
 default['tomcat']['unpack_wars'] = true
 default['tomcat']['auto_deploy'] = true
 case node[:platform]
@@ -25,4 +26,12 @@ when 'centos', 'redhat', 'fedora', 'amazon'
   default['tomcat']['system_env_dir'] = '/etc/sysconfig'
 when 'debian', 'ubuntu'
   default['tomcat']['system_env_dir'] = '/etc/default'
+end
+case node[:platform]
+when 'centos', 'redhat', 'fedora', 'amazon'
+  default['tomcat']['user'] = 'tomcat'
+  default['tomcat']['group'] = 'tomcat'
+when 'debian', 'ubuntu'
+  default['tomcat']['user'] = "tomcat#{node['tomcat']['base_version']}"
+  default['tomcat']['group'] = "tomcat#{node['tomcat']['base_version']}"
 end
