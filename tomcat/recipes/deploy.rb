@@ -31,9 +31,10 @@ node[:deploy].each do |application, deploy|
 
   include_recipe 'tomcat::service'
 
-  service 'tomcat' do
-    action :restart
+  execute 'trigger tomcat service restart' do
+    command ':'
     not_if { node['tomcat']['auto_deploy'].to_s == 'true' }
+    notifies :restart, resources(:service => 'tomcat')
   end
 end
 
