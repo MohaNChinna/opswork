@@ -11,6 +11,7 @@ bash '(re-)start autofs earlier' do
   code <<-EOC
     service autofs restart
   EOC
+  notifies :restart, resources(:service => 'tomcat')
 end
 
 include_recipe 'tomcat::container_config'
