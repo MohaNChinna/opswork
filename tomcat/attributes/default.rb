@@ -23,15 +23,11 @@ default['tomcat']['apache_tomcat_bind_path'] = '/tc/'
 default['tomcat']['webapps_dir_entries_to_delete'] = %w(config log public tmp)
 case node[:platform]
 when 'centos', 'redhat', 'fedora', 'amazon'
-  default['tomcat']['system_env_dir'] = '/etc/sysconfig'
-when 'debian', 'ubuntu'
-  default['tomcat']['system_env_dir'] = '/etc/default'
-end
-case node[:platform]
-when 'centos', 'redhat', 'fedora', 'amazon'
   default['tomcat']['user'] = 'tomcat'
   default['tomcat']['group'] = 'tomcat'
+  default['tomcat']['system_env_dir'] = '/etc/sysconfig'
 when 'debian', 'ubuntu'
   default['tomcat']['user'] = "tomcat#{node['tomcat']['base_version']}"
   default['tomcat']['group'] = "tomcat#{node['tomcat']['base_version']}"
+  default['tomcat']['system_env_dir'] = '/etc/default'
 end
