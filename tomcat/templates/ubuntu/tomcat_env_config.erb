@@ -13,11 +13,11 @@
 
 # Run Tomcat as this user ID. Not setting this or leaving it blank will use the
 # default of tomcat<%= node['tomcat']['base_version'] %>.
-TOMCAT6_USER=tomcat<%= node['tomcat']['base_version'] %>
+TOMCAT<%= node['tomcat']['base_version'] %>_USER=tomcat<%= node['tomcat']['base_version'] %>
 
 # Run Tomcat as this group ID. Not setting this or leaving it blank will use
 # the default of tomcat<%= node['tomcat']['base_version'] %>.
-TOMCAT6_GROUP=tomcat<%= node['tomcat']['base_version'] %>
+TOMCAT<%= node['tomcat']['base_version'] %>_GROUP=tomcat<%= node['tomcat']['base_version'] %>
 
 # The home directory of the Java development kit (JDK). You need at least
 # JDK version 1.5. If JAVA_HOME is not set, some common directories for
