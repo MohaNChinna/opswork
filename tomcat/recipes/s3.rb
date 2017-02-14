@@ -1,6 +1,6 @@
 s3_file "/tmp/weather_reporting.war"
   bucket "icp-cf-test"
-  s3_url "https://s3.ap-south-1.amazonaws.com/icp-cf-test"
+  remote_path "weather_reporting.war"
   mode '0644'
   action :create
   aws_access_key_id node[:custom_access_key]
