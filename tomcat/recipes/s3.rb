@@ -1,4 +1,4 @@
-s3_file "/tmp/test" do
+s3_file "/tmp/weather_reporting.war" do
   bucket "icp-cf-test"
   remote_path "weather_reporting.war"
   mode '0644'
